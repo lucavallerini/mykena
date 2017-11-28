@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name" translatable="false">Kena Mobile</string>
+    <string name="dashoboardActivityLabel" translatable="false">MyKena</string>
+
+    <string name="connectionNotAvailableMessage">Internet connection not available. Retry later.</string>
+
+    <string name="loginDescription">Login</string>
+    <string name="usernameTextViewText">Username</string>
+    <string name="passwordTextViewText">Password</string>
+    <string name="loginButtonText">Login</string>
+    <string name="rememberCredentialsCheckboxText">Login automatically</string>
+    <string name="clearDataButtonText">Clear</string>
+    <string name="rechargeDescription">or recharge your credit</string>
+    <string name="rechargeButtonText">Recharge</string>
+    <string name="rechargeActivityLabel">Recharge</string>
+
+    <string name="creditLabel">Credit: </string>
+    <string name="credit">%1$.2f €</string>
+    <string name="simActivationDateLabel">SIM activation: </string>
+    <string name="simTerminationDateLabel">SIM termination: </string>
+    <string name="tariffPlanLabel">Tariff plan: </string>
+
+    <string name="promoDescriptionButtonContentDescription">Promo description</string>
+    <string name="promoPriceLabel">Price: </string>
+    <string name="promoActiveFromLabel">Active from: </string>
+    <string name="promoActiveUntilLabel">Active until: </string>
+    <string name="dataLabel">Data: </string>
+    <string name="dataEuLabel">Data EU: </string>
+    <string name="callsLabel">Calls: </string>
+
+    <string name="callsMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+    <string name="dataMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+    <string name="dataEuMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+
+    <string name="dateHourFormat">%1$td/%1$tm/%1$tY %1$tT</string>
+
+    <!-- Strings related to dashboard action bar menu -->
+    <string name="action_refresh">Refresh</string>
+    <string name="action_exit">Exit</string>
+    <string name="action_about">About</string>
+
+    <!-- Error messages -->
+    <string name="error_login_not_successfull">Login error. Check again your username and password.</string>
+    <string name="error_json_parsing_error">Data retrieving error. Please try again.</string>
+    <string name="title_activity_authenticator">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="drawer_open">Drawer open</string>
+    <string name="drawer_close">Drawer close</string>
+</resources>

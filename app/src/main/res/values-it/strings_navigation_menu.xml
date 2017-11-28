@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_item_overview">Panoramica</string>
+    <string name="navigation_item_user">Dati utente</string>
+    <string name="navigation_item_sim">Dati SIM</string>
+    <string name="navigation_item_recharge">Ricarica</string>
+    <string name="navigation_item_traffic_overview">Traffico</string>
+    <string name="navigation_item_options">Opzioni tariffarie</string>
+    <string name="navigation_item_other_packages">Altri pacchetti tariffari</string>
+
+    <string name="navigation_item_settings">Impostazioni</string>
+    <string name="navigation_item_info">Informazioni</string>
+</resources>

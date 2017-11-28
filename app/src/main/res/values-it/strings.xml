@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kena Mobile</string>
+
+    <string name="connectionNotAvailableMessage">Connessione ad Internet assente. Riprova più tardi.</string>
+
+    <string name="loginDescription">Accedi</string>
+    <string name="usernameTextViewText">Nome utente</string>
+    <string name="passwordTextViewText">Password</string>
+    <string name="loginButtonText">Entra</string>
+    <string name="rememberCredentialsCheckboxText">Accedi automaticamente</string>
+    <string name="clearDataButtonText">Cancella</string>
+    <string name="rechargeDescription">Effettua una ricarica</string>
+    <string name="rechargeButtonText">Ricarica</string>
+    <string name="rechargeActivityLabel">Ricarica</string>
+
+    <string name="creditLabel">Credito: </string>
+    <string name="credit">%1$.2f €</string>
+    <string name="simActivationDateLabel">Attivazione SIM: </string>
+    <string name="simTerminationDateLabel">Scadenza SIM: </string>
+    <string name="tariffPlanLabel">Piano tariffario: </string>
+
+    <string name="promoDescriptionButtonContentDescription">Descrizione della promozione</string>
+    <string name="promoPriceLabel">Prezzo: </string>
+    <string name="promoActiveFromLabel">Data attivazione: </string>
+    <string name="promoActiveUntilLabel">Prossimo rinnovo: </string>
+    <string name="dataLabel">Dati: </string>
+    <string name="dataEuLabel">Dati UE: </string>
+    <string name="callsLabel">Chiamate: </string>
+
+    <string name="callsMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+    <string name="dataMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+    <string name="dataEuMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
+
+    <string name="dateHourFormat">%1$td/%1$tm/%1$tY %1$tT</string>
+
+    <!-- Strings related to dashboard action bar menu -->
+    <string name="action_refresh">Aggiorna</string>
+    <string name="action_exit">Esci</string>
+    <string name="action_about">Informazioni</string>
+
+    <!-- Error messages -->
+    <string name="error_login_not_successfull">Errore durante il login. Controllare le proprie credenziali.</string>
+    <string name="error_json_parsing_error">Errore nel recupero dei dati. Riprovare.</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/navigation_group_mykena">
+        <item android:title="@string/navigation_group_mykena">
+            <menu>
+                <item
+                    android:id="@+id/navigation_overview"
+                    android:icon="@drawable/ic_overview"
+                    android:title="@string/navigation_item_overview" />
+
+                <item
+                    android:id="@+id/navigation_user"
+                    android:icon="@drawable/ic_account_details"
+                    android:title="@string/navigation_item_user" />
+
+                <item
+                    android:id="@+id/navigation_sim"
+                    android:icon="@drawable/ic_sim_details"
+                    android:title="@string/navigation_item_sim" />
+
+                <item
+                    android:id="@+id/navigation_options"
+                    android:icon="@drawable/ic_options"
+                    android:title="@string/navigation_item_options" />
+
+                <item
+                    android:id="@+id/navigation_recharge"
+                    android:icon="@drawable/ic_recharge_credit"
+                    android:title="@string/navigation_item_recharge" />
+
+                <item
+                    android:id="@+id/navigation_other_packages"
+                    android:icon="@drawable/ic_other_package"
+                    android:title="@string/navigation_item_other_packages" />
+
+                <item
+                    android:id="@+id/navigation_traffic_overview"
+                    android:icon="@drawable/ic_traffic_details"
+                    android:title="@string/navigation_item_traffic_overview" />
+            </menu>
+        </item>
+    </group>
+
+
+    <group android:id="@+id/navigation_group_app">
+        <item
+            android:id="@+id/navigation_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/navigation_item_settings" />
+
+        <item
+            android:id="@+id/navigation_info"
+            android:icon="@drawable/ic_info"
+            android:title="@string/navigation_item_info" />
+    </group>
+
+</menu>
