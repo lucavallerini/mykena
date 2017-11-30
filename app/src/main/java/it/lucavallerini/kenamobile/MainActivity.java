@@ -19,14 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        LoginFragment.OnRechargeButtonClickListener {
+
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private View mHeaderView;
 
     private Toolbar mToolbar;
 
-    private boolean mUserLoggedIn = true; // TODO change this!
+    private boolean mUserLoggedIn = false; // TODO change this!
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.navigation_overview:
                 changeFragment(new OverviewFragment());
                 break;
+            case R.id.navigation_recharge:
+                changeFragment(new WebViewFragment());
+                break;
             default:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
         }
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     private void setupNavigationView() {
         ActionBarDrawerToggle actionBarDrawerToggle =
@@ -124,10 +130,10 @@ public class MainActivity extends AppCompatActivity
      * @param container the container where to load the {@link Fragment}
      * @param fragment  the {@link Fragment} to load
      */
-    private void changeFragment(int container, Fragment fragment) {
+    protected void changeFragment(int container, Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(container, fragment);
+        fragmentTransaction.replace(container, fragment);
         fragmentTransaction.commit();
     }
 
@@ -136,7 +142,12 @@ public class MainActivity extends AppCompatActivity
      *
      * @param fragment the {@link Fragment} to load
      */
-    private void changeFragment(Fragment fragment) {
+    protected void changeFragment(Fragment fragment) {
         changeFragment(R.id.content_frame, fragment);
+    }
+
+    @Override
+    public void onRechargeButtonClick() {
+        changeFragment(new WebViewFragment());
     }
 }
