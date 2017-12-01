@@ -13,6 +13,8 @@ import java.util.List;
 
 public class OverviewFragment extends Fragment {
 
+    final static String OVERVIEW_FRAGMENT_TAG = "overviewFragment";
+
     private View mOverviewFragment;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;

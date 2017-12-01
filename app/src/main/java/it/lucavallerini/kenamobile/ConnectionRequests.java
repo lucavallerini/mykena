@@ -27,6 +27,7 @@ import java.util.Map;
 
 class ConnectionRequests {
 
+    static final String RECHARGE_URI = "https://www.kenamobile.it/ricarica";
     /**
      * Cookie name, domain, path and version parameters.
      */
@@ -34,15 +35,12 @@ class ConnectionRequests {
     private static final String COOKIE_SESSION_DOMAIN = "";
     private static final String COOKIE_SESSION_PATH = "/";
     private static final int COOKIE_SESSION_VERSION = 0;
-
     /**
      * Site URIs.
      */
     private static final String COOKIE_URI = "https://www.kenamobile.it";
     private static final String DASHBOARD_URI = "https://www.kenamobile.it/mykena/#/dashboard";
     private static final String MYKENA_URI = "https://www.kenamobile.it/wp-admin/admin-ajax.php";
-    private static final String RECHARGE_URI = "https://www.kenamobile.it/ricarica";
-
     /**
      * Connections parameters keys.
      */
@@ -86,7 +84,7 @@ class ConnectionRequests {
      * Retrieve the cookie that stores the session ID
      * that need to be used for further requests.
      */
-    private void getCookie() {
+    void getCookie(final String username, final String password) {
         StringRequest requestCookie = new StringRequest(Request.Method.GET,
                 COOKIE_URI,
                 new Response.Listener<String>() {
@@ -105,6 +103,8 @@ class ConnectionRequests {
                             e.printStackTrace();
                             Log.e("setCookie()", "Error on setting cookie");
                         }
+
+                        login(username, password);
                     }
                 },
                 new Response.ErrorListener() {

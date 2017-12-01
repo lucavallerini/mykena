@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 public class LoginFragment extends Fragment {
 
-    private OnRechargeButtonClickListener mRechargeButtonListener;
+    final static String LOGIN_FRAGMENT_TAG = "loginFragment";
+
+    private OnLoadNewFragmentListener mOnLoadNewFragmentListener;
 
     private Button mRechargeButton;
     private Button mLoginButton;
@@ -22,8 +24,13 @@ public class LoginFragment extends Fragment {
     private TextView mPasswordTextView;
     private CheckBox mRememberMeCheckBox;
 
+    private ConnectionRequests mConnection;
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
+        // Create a new connection
+        mConnection = new ConnectionRequests(getContext());
+
         // Inflate the layout
         return layoutInflater.inflate(R.layout.login_fragment, container, false);
     }
@@ -40,7 +47,7 @@ public class LoginFragment extends Fragment {
         mRechargeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRechargeButtonListener.onRechargeButtonClick();
+                mOnLoadNewFragmentListener.onLoadNewFragment(new WebViewFragment(), "webview");
             }
         });
 
@@ -57,6 +64,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO login action
+                mConnection.getCookie(mUsernameTextView.getText().toString(),
+                        mPasswordTextView.getText().toString());
             }
         });
     }
@@ -65,7 +74,7 @@ public class LoginFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mRechargeButtonListener = (OnRechargeButtonClickListener) context;
+            mOnLoadNewFragmentListener = (OnLoadNewFragmentListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnRechargeButtonClickListener");
         }
@@ -89,12 +98,5 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    /**
-     * Interface that the host activity needs to implement in
-     * order to receive a callback when the Recharge button
-     * is clicked.
-     */
-    public interface OnRechargeButtonClickListener {
-        void onRechargeButtonClick();
-    }
+
 }

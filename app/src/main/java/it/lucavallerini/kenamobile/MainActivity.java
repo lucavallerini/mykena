@@ -20,13 +20,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        LoginFragment.OnRechargeButtonClickListener {
+        OnLoadNewFragmentListener {
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private View mHeaderView;
 
     private Toolbar mToolbar;
+
+    private MenuItem mCurrentItem;
 
     private boolean mUserLoggedIn = false; // TODO change this!
 
@@ -54,11 +56,11 @@ public class MainActivity extends AppCompatActivity
         TextView userName = mHeaderView.findViewById(R.id.header_text_first_row);
         TextView phoneNumber = mHeaderView.findViewById(R.id.header_text_second_row);
         if (!mUserLoggedIn) {
-            userName.setText("Utente non loggato");
+            userName.setText("");
             ((ViewGroup) mHeaderView).removeView(phoneNumber);
         } else {
-            userName.setText("Luca Vallerini");
-            phoneNumber.setText("3476806462");
+            userName.setText("");
+            phoneNumber.setText("");
         }
         mNavigationView.addHeaderView(mHeaderView);
 
@@ -74,30 +76,46 @@ public class MainActivity extends AppCompatActivity
 
         // Set the content of the main container
         if (!mUserLoggedIn) {
-            changeFragment(new LoginFragment());
+            changeFragment(new LoginFragment(), LoginFragment.LOGIN_FRAGMENT_TAG);
         } else {
-            changeFragment(new OverviewFragment());
+            changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        if (mCurrentItem != null) {
+            mCurrentItem.setChecked(false);
+        }
+
+        mCurrentItem = item;
+
+        switch (mCurrentItem.getItemId()) {
             case R.id.navigation_overview:
-                changeFragment(new OverviewFragment());
+                changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
+                setToolbarText(getString(R.string.navigation_item_overview));
                 break;
             case R.id.navigation_recharge:
-                changeFragment(new WebViewFragment());
+                Bundle bundle = new Bundle();
+                bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, ConnectionRequests.RECHARGE_URI);
+
+                Fragment newFragment = new WebViewFragment();
+                newFragment.setArguments(bundle);
+
+                changeFragment(newFragment, WebViewFragment.WEBVIEW_FRAGMENT_TAG);
+                setToolbarText(getString(R.string.navigation_item_recharge));
                 break;
             default:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
         }
 
+        // Select item
+        mCurrentItem.setChecked(true);
+
         // Close navigation drawer
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     private void setupNavigationView() {
         ActionBarDrawerToggle actionBarDrawerToggle =
@@ -117,11 +135,22 @@ public class MainActivity extends AppCompatActivity
 
         actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(android.R.color.white));
 
-        //Setting the actionbarToggle to drawer layout
+        // Setting the actionbarToggle to drawer layout
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
 
         // Calling sync state is necessary or else hamburger icon won't show up
         actionBarDrawerToggle.syncState();
+    }
+
+    /**
+     * Set the text that appears on the toolbar.
+     *
+     * @param text Text of the toolbar
+     */
+    private void setToolbarText(String text) {
+        if (mToolbar != null) {
+            mToolbar.setTitle(text);
+        }
     }
 
     /**
@@ -130,10 +159,12 @@ public class MainActivity extends AppCompatActivity
      * @param container the container where to load the {@link Fragment}
      * @param fragment  the {@link Fragment} to load
      */
-    protected void changeFragment(int container, Fragment fragment) {
+    // TODO set appropriate tag for transaction and back stack
+    protected void changeFragment(int container, Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(container, fragment);
+        fragmentTransaction.replace(container, fragment, tag);
+        fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
     }
 
@@ -142,12 +173,28 @@ public class MainActivity extends AppCompatActivity
      *
      * @param fragment the {@link Fragment} to load
      */
-    protected void changeFragment(Fragment fragment) {
-        changeFragment(R.id.content_frame, fragment);
+    protected void changeFragment(Fragment fragment, String tag) {
+        changeFragment(R.id.content_frame, fragment, tag);
     }
 
     @Override
-    public void onRechargeButtonClick() {
-        changeFragment(new WebViewFragment());
+    public void onLoadNewFragment(Fragment fragment, String tag) {
+        changeFragment(fragment, tag);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment webViewFragment =
+                getSupportFragmentManager().findFragmentByTag(WebViewFragment.WEBVIEW_FRAGMENT_TAG);
+        if (webViewFragment instanceof WebViewFragment) {
+            WebViewFragment webView = (WebViewFragment) webViewFragment;
+            if (webView.canGoBack()) {
+                webView.goBack();
+                return;
+            }
+        }
+
+        // Otherwise defer to system default behavior.
+        super.onBackPressed();
     }
 }
