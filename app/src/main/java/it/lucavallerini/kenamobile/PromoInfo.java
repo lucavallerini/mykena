@@ -5,7 +5,7 @@ import android.databinding.Bindable;
 
 import java.util.Date;
 
-public class PromoInfo extends BaseObservable {
+class PromoInfo extends BaseObservable {
     // Promo plan information
     private String promoName;
     private Date promoActivationDate;

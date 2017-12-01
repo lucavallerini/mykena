@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity
+class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnLoadNewFragmentListener {
 
@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity
      * @param container the container where to load the {@link Fragment}
      * @param fragment  the {@link Fragment} to load
      */
-    // TODO set appropriate tag for transaction and back stack
     protected void changeFragment(int container, Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

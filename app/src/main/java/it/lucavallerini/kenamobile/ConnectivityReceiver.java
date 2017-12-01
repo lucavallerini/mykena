@@ -7,7 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 
-public class ConnectivityReceiver extends BroadcastReceiver {
+class ConnectivityReceiver extends BroadcastReceiver {
 
     public static ConnectivityReceiverListener connectivityReceiverListener;
 
@@ -19,7 +19,13 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+
+        NetworkInfo activeNetwork = null;
+        try {
+            activeNetwork = connectivityManager.getActiveNetworkInfo();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
         boolean isConnected = activeNetwork != null && activeNetwork.isConnected();
 

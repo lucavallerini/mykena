@@ -5,7 +5,7 @@ import android.databinding.Bindable;
 
 import java.util.Date;
 
-public class DashboardInfo extends BaseObservable {
+class DashboardInfo extends BaseObservable {
     private double creditLeft;
     private String phoneNumber;
     private Date simActivationDate;

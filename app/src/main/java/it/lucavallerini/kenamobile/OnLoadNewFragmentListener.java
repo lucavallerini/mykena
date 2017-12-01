@@ -7,6 +7,6 @@ import android.support.v4.app.Fragment;
  * order to receive a callback when the app needs to load
  * a new fragment.
  */
-public interface OnLoadNewFragmentListener {
+interface OnLoadNewFragmentListener {
     void onLoadNewFragment(Fragment fragment, String tag);
 }

@@ -1,6 +1,5 @@
 package it.lucavallerini.kenamobile;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -8,7 +7,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import java.net.CookieHandler;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,13 +43,6 @@ class ConnectionRequests {
     private static final String MAYA_ACTION_TRAFFIC = "getTraffic";
 
     private ConnectionSingleton mConnectionSingleton;
-    private MyCookieManager mCookieManger;
-
-    ConnectionRequests(Context context) {
-        mConnectionSingleton = ConnectionSingleton.getInstance(context);
-        mCookieManger = new MyCookieManager();
-        CookieHandler.setDefault(mCookieManger);
-    }
 
     /**
      * Logout from My Kena for the provided phone number.

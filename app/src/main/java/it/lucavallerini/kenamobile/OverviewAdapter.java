@@ -15,7 +15,7 @@ import it.lucavallerini.kenamobile.databinding.CreditCardViewBinding;
 import it.lucavallerini.kenamobile.databinding.PromoCardViewBinding;
 
 
-public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int CREDIT_CARD = 0;
     private static final int PROMO_CARD = 1;
@@ -49,7 +49,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (viewType == CREDIT_CARD) {
             CreditCardViewBinding binding = DataBindingUtil.inflate(
