@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.navigation_recharge:
                 Bundle bundle = new Bundle();
-                bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, ConnectionRequests.RECHARGE_URI);
+                bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, WebViewFragment.RECHARGE_URI);
 
                 Fragment newFragment = new WebViewFragment();
                 newFragment.setArguments(bundle);

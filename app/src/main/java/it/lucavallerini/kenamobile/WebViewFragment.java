@@ -19,6 +19,8 @@ public class WebViewFragment extends Fragment {
     final static String URI_TO_LOAD_KEY = "URI_TO_LOAD";
     final static String WEBVIEW_FRAGMENT_TAG = "webviewFragment";
 
+    final static String RECHARGE_URI = "https://www.kenamobile.it/ricarica";
+
     private WebView mWebView;
     private ProgressBar mProgressBar;
 
