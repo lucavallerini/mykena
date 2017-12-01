@@ -9,10 +9,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.HttpCookie;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,30 +45,16 @@ class ConnectionRequests {
     private static final String MAYA_ACTION_TRAFFIC = "getTraffic";
 
     private ConnectionSingleton mConnectionSingleton;
-    private CookieManager mCookieManger;
+    private MyCookieManager mCookieManger;
 
     ConnectionRequests(Context context) {
         mConnectionSingleton = ConnectionSingleton.getInstance(context);
-        mCookieManger = new CookieManager();
+        mCookieManger = new MyCookieManager();
         CookieHandler.setDefault(mCookieManger);
     }
 
     /**
-     * Stores the cookie in the {@link CookieManager}.
-     *
-     * @param cookie {@link HttpCookie} cookie to store
-     */
-    void setCookie(HttpCookie cookie) {
-        try {
-            mCookieManger.getCookieStore()
-                    .add(new URI(COOKIE_URI), cookie);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Logout from MyKena for the provided phone number.
+     * Logout from My Kena for the provided phone number.
      *
      * @param msisdn The phone number.
      */
@@ -103,14 +85,5 @@ class ConnectionRequests {
         };
 
         mConnectionSingleton.addToRequestQueue(requestLogout.setTag("REQUEST"));
-    }
-
-    /**
-     * Add request to the request queue.
-     *
-     * @param request the {@link Request} to add to the queue.
-     */
-    void addToRequestQueue(Request request) {
-        mConnectionSingleton.addToRequestQueue(request);
     }
 }

@@ -71,12 +71,12 @@ public class LoginFragment extends Fragment {
     private TextView mPasswordTextView;
     private CheckBox mRememberMeCheckBox;
 
-    private ConnectionRequests mConnection;
+    private ConnectionSingleton mConnection;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
         // Create a new connection
-        mConnection = new ConnectionRequests(getContext());
+        mConnection = ConnectionSingleton.getInstance(getContext());
 
         // Inflate the layout
         return layoutInflater.inflate(R.layout.login_fragment, container, false);
@@ -156,7 +156,6 @@ public class LoginFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i(LOGIN_FRAGMENT_TAG, response);
                         HttpCookie cookie = new HttpCookie(COOKIE_SESSION_NAME, response);
                         cookie.setDomain(COOKIE_SESSION_DOMAIN);
                         cookie.setPath(COOKIE_SESSION_PATH);
@@ -193,7 +192,6 @@ public class LoginFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.i(LOGIN_FRAGMENT_TAG, response);
                         try {
                             JSONObject loginResponse = new JSONObject(response);
 
@@ -201,8 +199,6 @@ public class LoginFragment extends Fragment {
                                 // TODO Login not successfull
                                 Log.i(LOGIN_FRAGMENT_TAG, "Wrong credentials!");
                             } else {
-                                Log.i(LOGIN_FRAGMENT_TAG, response);
-
                                 Bundle bundle = new Bundle();
                                 bundle.putString(OverviewFragment.MSISDN,
                                         mUsernameTextView.getText().toString());

@@ -184,10 +184,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        Fragment webViewFragment =
+        Fragment fragment =
                 getSupportFragmentManager().findFragmentByTag(WebViewFragment.WEBVIEW_FRAGMENT_TAG);
-        if (webViewFragment instanceof WebViewFragment) {
-            WebViewFragment webView = (WebViewFragment) webViewFragment;
+        if (fragment instanceof WebViewFragment) {
+            WebViewFragment webView = (WebViewFragment) fragment;
             if (webView.canGoBack()) {
                 webView.goBack();
                 return;

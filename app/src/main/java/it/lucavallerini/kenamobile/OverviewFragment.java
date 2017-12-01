@@ -53,7 +53,7 @@ public class OverviewFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private List<Object> mAdapterList;
 
-    private ConnectionRequests mConnection;
+    private ConnectionSingleton mConnection;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class OverviewFragment extends Fragment {
         mAdapter = new OverviewAdapter(mAdapterList);
         mRecyclerView.setAdapter(mAdapter);
 
-        mConnection = new ConnectionRequests(getContext());
+        mConnection = ConnectionSingleton.getInstance(getContext());
 
         return mOverviewFragment;
     }
@@ -79,9 +79,8 @@ public class OverviewFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String msisdn = getArguments().getString(MSISDN);
-        Log.d("username", msisdn);
         getCreditInfo(msisdn);
-//        getPromoInfo(msisdn);
+        getPromoInfo(msisdn);
     }
 
     /**
@@ -103,7 +102,6 @@ public class OverviewFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(OVERVIEW_FRAGMENT_TAG, response);
                         DashboardInfo creditInfo = new DashboardInfo();
                         try {
                             JSONObject jCreditInfo = new JSONObject(response);
@@ -114,7 +112,8 @@ public class OverviewFragment extends Fragment {
                             String activeFrom = jCreditInfo.getString("activeFrom");
                             String activeTo = jCreditInfo.getString("activeTo");
 
-                            SimpleDateFormat dateFormatSIM = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US);
+                            SimpleDateFormat dateFormatSIM =
+                                    new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US);
                             try {
                                 creditInfo.setSimActivationDate(dateFormatSIM.parse(activeFrom));
                                 creditInfo.setSimTerminationDate(dateFormatSIM.parse(activeTo));
@@ -122,6 +121,8 @@ public class OverviewFragment extends Fragment {
                                 Log.e("getSimInfo()", "Date parsing error");
                                 e.printStackTrace();
                             }
+
+                            creditInfo.setPhoneNumber(msisdn);
 
                             mAdapterList.add(0, creditInfo);
                             mAdapter.notifyDataSetChanged();
@@ -147,7 +148,7 @@ public class OverviewFragment extends Fragment {
             }
         };
 
-        mConnection.addToRequestQueue(requestData.setTag("REQUEST"));
+        mConnection.addToRequestQueue(requestData.setTag(OVERVIEW_FRAGMENT_TAG));
     }
 
     /**
@@ -174,7 +175,6 @@ public class OverviewFragment extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d(OVERVIEW_FRAGMENT_TAG, response);
                         PromoInfo promoInfo = new PromoInfo();
 
                         try {
@@ -248,6 +248,6 @@ public class OverviewFragment extends Fragment {
             }
         };
 
-        mConnection.addToRequestQueue(requestData);
+        mConnection.addToRequestQueue(requestData.setTag(OVERVIEW_FRAGMENT_TAG));
     }
 }

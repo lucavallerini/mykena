@@ -8,10 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import java.net.CookieHandler;
 
 
 public class WebViewFragment extends Fragment {
@@ -37,8 +38,11 @@ public class WebViewFragment extends Fragment {
         mWebView = view.findViewById(R.id.webview);
         mProgressBar = view.findViewById(R.id.progress_bar);
 
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        MyCookieManager cookieManager =
+                new MyCookieManager(new MyCookieStore(), mWebView);
+        CookieHandler.setDefault(cookieManager);
+
+        mWebView.getSettings().setJavaScriptEnabled(true);
 
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
