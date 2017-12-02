@@ -70,7 +70,8 @@ public class OverviewFragment extends Fragment {
         mAdapter = new OverviewAdapter(mAdapterList);
         mRecyclerView.setAdapter(mAdapter);
 
-        mConnection = ConnectionSingleton.getInstance(getContext());
+        mConnection = ConnectionSingleton.getInstance(getContext().getApplicationContext());
+        Log.i(OVERVIEW_FRAGMENT_TAG, mConnection.getCookieManager().getCookieStore().getCookies().toString());
 
         return mOverviewFragment;
     }
@@ -78,9 +79,11 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String msisdn = getArguments().getString(MSISDN);
-        getCreditInfo(msisdn);
-        getPromoInfo(msisdn);
+        if (getArguments() != null) {
+            String msisdn = getArguments().getString(MSISDN);
+            getCreditInfo(msisdn);
+            getPromoInfo(msisdn);
+        }
     }
 
     /**

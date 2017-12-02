@@ -25,7 +25,7 @@
                     android:title="@string/navigation_item_options" />
 
                 <item
-                    android:id="@+id/navigation_recharge"
+                    android:id="@+id/navigation_recharge_logged_in"
                     android:icon="@drawable/ic_recharge_credit"
                     android:title="@string/navigation_item_recharge" />
 
@@ -38,10 +38,14 @@
                     android:id="@+id/navigation_traffic_overview"
                     android:icon="@drawable/ic_traffic_details"
                     android:title="@string/navigation_item_traffic_overview" />
+
+                <item
+                    android:id="@+id/navigation_logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="@string/action_exit" />
             </menu>
         </item>
     </group>
-
 
     <group android:id="@+id/navigation_group_app">
         <item

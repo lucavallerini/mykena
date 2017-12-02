@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +13,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,17 +29,8 @@ public class LoginFragment extends Fragment {
     final static String LOGIN_FRAGMENT_TAG = "loginFragment";
 
     /**
-     * Cookie name, domain, path and version parameters.
-     */
-    private static final String COOKIE_SESSION_NAME = "_wp_session";
-    private static final String COOKIE_SESSION_DOMAIN = "";
-    private static final String COOKIE_SESSION_PATH = "/";
-    private static final int COOKIE_SESSION_VERSION = 0;
-
-    /**
      * Site URIs.
      */
-    private static final String COOKIE_URI = "https://www.kenamobile.it/mykena/";
     private static final String MYKENA_URI = "https://www.kenamobile.it/wp-admin/admin-ajax.php";
 
     /**
@@ -73,10 +62,13 @@ public class LoginFragment extends Fragment {
 
     private ConnectionSingleton mConnection;
 
+    private AlertDialog mAlertDialog;
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
         // Create a new connection
-        mConnection = ConnectionSingleton.getInstance(getContext());
+        mConnection = ConnectionSingleton.getInstance(getContext().getApplicationContext());
+        Log.i(LOGIN_FRAGMENT_TAG, mConnection.getCookieManager().getCookieStore().getCookies().toString());
 
         // Inflate the layout
         return layoutInflater.inflate(R.layout.login_fragment, container, false);
@@ -112,8 +104,8 @@ public class LoginFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO check for proper credentials
-                getCookie();
+                mAlertDialog = showDialog(getContext(), "Login", "Accesso in corso...").show();
+                login();
             }
         });
     }
@@ -136,7 +128,7 @@ public class LoginFragment extends Fragment {
             mUsernameTextView.setText("");
             mUsernameTextView.requestFocus();
         }
-        
+
         if (mPasswordTextView != null) {
             mPasswordTextView.setText("");
         }
@@ -144,43 +136,6 @@ public class LoginFragment extends Fragment {
         if (mRememberMeCheckBox != null) {
             mRememberMeCheckBox.setChecked(false);
         }
-    }
-
-    /**
-     * Retrieve the cookie that stores the session ID
-     * that needs to be used for further requests.
-     */
-    private void getCookie() {
-        StringRequest requestCookie = new StringRequest(Request.Method.GET,
-                COOKIE_URI,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        HttpCookie cookie = new HttpCookie(COOKIE_SESSION_NAME, response);
-                        cookie.setDomain(COOKIE_SESSION_DOMAIN);
-                        cookie.setPath(COOKIE_SESSION_PATH);
-                        cookie.setVersion(COOKIE_SESSION_VERSION);
-                        mConnection.setCookie(cookie);
-                        login();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(LOGIN_FRAGMENT_TAG, error.toString());
-                    }
-                }) {
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                String header_response = String.valueOf(response.headers.values());
-                int indexStart = header_response.indexOf("_wp_session=");
-                int indexEnd = header_response.indexOf("; expires=");
-                return Response.success(header_response.substring(indexStart + 12, indexEnd),
-                        HttpHeaderParser.parseCacheHeaders(response));
-            }
-        };
-
-        mConnection.addToRequestQueue(requestCookie.setTag(LOGIN_FRAGMENT_TAG));
     }
 
     /**
@@ -205,6 +160,8 @@ public class LoginFragment extends Fragment {
 
                                 Fragment newFragment = new OverviewFragment();
                                 newFragment.setArguments(bundle);
+
+                                mAlertDialog.dismiss();
 
                                 mOnLoadNewFragmentListener
                                         .onLoadNewFragment(newFragment,
@@ -235,5 +192,12 @@ public class LoginFragment extends Fragment {
         };
 
         mConnection.addToRequestQueue(requestLogin.setTag(LOGIN_FRAGMENT_TAG));
+    }
+
+    private AlertDialog.Builder showDialog(Context context, String title, String message) {
+        return new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(false);
     }
 }

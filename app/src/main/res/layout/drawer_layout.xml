@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="true">
 
     <!-- The main content view -->
     <RelativeLayout
@@ -34,8 +34,8 @@
         android:layout_gravity="start"
         android:background="@color/cardview_light_background"
         android:elevation="16dp"
+        android:paddingTop="24dp"
         android:scrollbars="vertical"
-        app:itemBackground="@drawable/navigation_drawer_background_color"
-        app:itemIconTint="@color/navigation_drawer_text_icon_color_list"
-        app:itemTextColor="@color/navigation_drawer_text_icon_color_list" />
+        app:itemBackground="@drawable/drawer_list_selector"
+        app:itemIconTint="@color/list_selector_icon_color" />
 </android.support.v4.widget.DrawerLayout>

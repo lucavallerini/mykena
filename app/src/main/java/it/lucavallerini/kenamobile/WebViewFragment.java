@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class WebViewFragment extends Fragment {
 
     private WebView mWebView;
     private ProgressBar mProgressBar;
+    private ConnectionSingleton mConnection;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,9 +40,11 @@ public class WebViewFragment extends Fragment {
         mWebView = view.findViewById(R.id.webview);
         mProgressBar = view.findViewById(R.id.progress_bar);
 
-        MyCookieManager cookieManager =
-                new MyCookieManager(new MyCookieStore(), mWebView);
-        CookieHandler.setDefault(cookieManager);
+        mConnection = ConnectionSingleton.getInstance(mWebView.getContext());
+        CookieHandler.setDefault(mConnection.getCookieManager());
+
+        Log.i(WEBVIEW_FRAGMENT_TAG,
+                String.valueOf(mConnection.getCookieManager().acceptCookie()));
 
         mWebView.getSettings().setJavaScriptEnabled(true);
 

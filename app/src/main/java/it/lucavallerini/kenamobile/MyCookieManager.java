@@ -4,7 +4,6 @@ import android.webkit.WebView;
 
 import java.io.IOException;
 import java.net.CookieManager;
-import java.net.CookieStore;
 import java.net.URI;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,6 +12,7 @@ import java.util.Map;
 
 class MyCookieManager extends CookieManager {
 
+    private static MyCookieManager mInstance;
     private android.webkit.CookieManager mCookieManager;
 
     MyCookieManager() {
@@ -20,15 +20,23 @@ class MyCookieManager extends CookieManager {
         mCookieManager = android.webkit.CookieManager.getInstance();
     }
 
-    MyCookieManager(CookieStore cookieStore, WebView view) {
-        super(cookieStore, null);
-        mCookieManager = android.webkit.CookieManager.getInstance();
+    static synchronized MyCookieManager getInstance() {
+        if (mInstance == null) {
+            mInstance = new MyCookieManager();
+        }
+        return mInstance;
+    }
+
+    boolean acceptCookie() {
+        return mCookieManager.acceptCookie();
+    }
+
+    void setAcceptThirdPartyCookies(WebView view) {
         mCookieManager.setAcceptThirdPartyCookies(view, true);
     }
 
-    @Override
-    public CookieStore getCookieStore() {
-        return super.getCookieStore();
+    void setCookie(String url, String cookie) {
+        mCookieManager.setCookie(url, cookie);
     }
 
     @Override

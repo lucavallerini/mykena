@@ -15,7 +15,7 @@ import it.lucavallerini.kenamobile.databinding.CreditCardViewBinding;
 import it.lucavallerini.kenamobile.databinding.PromoCardViewBinding;
 
 
-class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class OverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int CREDIT_CARD = 0;
     private static final int PROMO_CARD = 1;

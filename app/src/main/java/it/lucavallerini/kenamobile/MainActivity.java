@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,33 +51,21 @@ class MainActivity extends AppCompatActivity
         // Insert navigation_header in the navigation drawer:
         // the navigation header is based on the login status
         mNavigationView = findViewById(R.id.navigation_drawer);
-        mHeaderView = getLayoutInflater().inflate(R.layout.navigation_header, mNavigationView, false);
+        mHeaderView = getLayoutInflater()
+                .inflate(R.layout.navigation_header, mNavigationView, false);
         TextView userName = mHeaderView.findViewById(R.id.header_text_first_row);
-        TextView phoneNumber = mHeaderView.findViewById(R.id.header_text_second_row);
-        if (!mUserLoggedIn) {
-            userName.setText("");
-            ((ViewGroup) mHeaderView).removeView(phoneNumber);
-        } else {
-            userName.setText("");
-            phoneNumber.setText("");
-        }
         mNavigationView.addHeaderView(mHeaderView);
-
-        // Inflate menu: the menu is also based on the login status of the user
-        if (!mUserLoggedIn) {
-            mNavigationView.inflateMenu(R.menu.navigation_menu_loggedout);
-        } else {
-            mNavigationView.inflateMenu(R.menu.navigation_menu_loggedin);
-        }
 
         // Set on click listener to the navigation drawer
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        // Set the content of the main container
+        // Set the content of the main container and menu
         if (!mUserLoggedIn) {
             changeFragment(new LoginFragment(), LoginFragment.LOGIN_FRAGMENT_TAG);
+            loggedMenu(false);
         } else {
             changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
+            loggedMenu(true);
         }
     }
 
@@ -94,8 +81,10 @@ class MainActivity extends AppCompatActivity
             case R.id.navigation_overview:
                 changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
                 setToolbarText(getString(R.string.navigation_item_overview));
+                loggedMenu(true);
                 break;
-            case R.id.navigation_recharge:
+            case R.id.navigation_recharge_logged_out:
+            case R.id.navigation_recharge_logged_in:
                 Bundle bundle = new Bundle();
                 bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, WebViewFragment.RECHARGE_URI);
 
@@ -104,7 +93,11 @@ class MainActivity extends AppCompatActivity
 
                 changeFragment(newFragment, WebViewFragment.WEBVIEW_FRAGMENT_TAG);
                 setToolbarText(getString(R.string.navigation_item_recharge));
+
+                loggedMenu(mCurrentItem.getItemId() == R.id.navigation_recharge_logged_in);
                 break;
+            case R.id.navigation_user:
+                setToolbarText(getString(R.string.navigation_item_user));
             default:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
         }
@@ -115,6 +108,15 @@ class MainActivity extends AppCompatActivity
         // Close navigation drawer
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loggedMenu(boolean logged) {
+        mNavigationView.getMenu().clear();
+        if (logged) {
+            mNavigationView.inflateMenu(R.menu.navigation_menu_loggedin);
+        } else {
+            mNavigationView.inflateMenu(R.menu.navigation_menu_loggedout);
+        }
     }
 
     private void setupNavigationView() {
@@ -165,6 +167,18 @@ class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(container, fragment, tag);
         fragmentTransaction.addToBackStack(tag);
         fragmentTransaction.commit();
+
+        if (!tag.equals(LoginFragment.LOGIN_FRAGMENT_TAG)) {
+            loggedMenu(true);
+        } else {
+            loggedMenu(false);
+        }
+
+        if (tag.equals(OverviewFragment.OVERVIEW_FRAGMENT_TAG)) {
+            setToolbarText(getString(R.string.navigation_item_overview));
+            mCurrentItem = mNavigationView.getMenu().findItem(R.id.navigation_overview);
+            mCurrentItem.setChecked(true);
+        }
     }
 
     /**

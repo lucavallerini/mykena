@@ -79,4 +79,8 @@ class ConnectionSingleton {
             e.printStackTrace();
         }
     }
+
+    MyCookieManager getCookieManager() {
+        return mCookieManger;
+    }
 }
