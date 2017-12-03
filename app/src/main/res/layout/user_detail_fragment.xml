@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/userCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/user_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/userDetailTitleLabel"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/first_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/user_detail_title"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/user_detail_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailNameLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/user_detail_name_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/first_name_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/last_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/first_name_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/user_detail_last_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailLastNameLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/user_detail_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/user_detail_last_name_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/last_name_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/sex_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/last_name_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/user_sex_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailSexLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/user_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/user_sex_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/sex_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/fiscal_code_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sex_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/fiscal_code_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailFiscalCodeLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/fiscal_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/fiscal_code_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/fiscal_code_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/birth_state_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/fiscal_code_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/birth_state_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailBirthStateLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/birth_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/birth_state_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/birth_state_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/birth_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/birth_state_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/birth_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailBirthDateLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/birth_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/birth_date_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/birth_date_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/birth_city_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/birth_date_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/birth_city_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailBirthCityLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/birth_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/birth_city_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/birth_city_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/birth_province_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/birth_city_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/birth_province_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailBirthProvinceLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/birth_province"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/birth_province_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/birth_province_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/birth_province_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/address_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailAddressLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/address_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/address_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/address_city_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/address_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/address_city_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailCityLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/address_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/address_city_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/address_city_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/address_province_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/address_city_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/address_province_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailProvinceLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/address_province"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/address_province_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/contactsCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userCard"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="16dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/contacts_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/userDetailContactsTitleLabel"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/contacts_phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/contacts_title"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/contacts_phone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailContactsMobilePhoneLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/contacts_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/contacts_phone_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/contacts_phone_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/contacts_other_phone_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/contacts_phone_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/contacts_other_phone_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailContactsOtherPhoneLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/contacts_other_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/contacts_other_phone_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/contacts_other_phone_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/contacts_email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/contacts_other_phone_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/contacts_email_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/userDetailContactsEmailLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/contacts_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/contacts_email_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/contacts_email_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/contacts_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/contacts_email_layout"
+                android:paddingEnd="8dp"
+                android:paddingStart="24dp">
+
+                <Button
+                    android:id="@+id/buttonEditContacts"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:height="36dp"
+                    android:text="@string/userDetailContactsEditButtonLabel" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

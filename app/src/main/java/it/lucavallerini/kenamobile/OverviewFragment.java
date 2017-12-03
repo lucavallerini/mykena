@@ -205,26 +205,32 @@ public class OverviewFragment extends Fragment {
 
                             promoInfo.setPromoPrice(jPromoDescription.getString("price"));
 
+                            double dataRemaining = jPromoData.getDouble("base_value");
                             promoInfo.setDataHuman(jPromoData.getDouble("value"));
                             promoInfo.setDataUnit(jPromoData.getString("unit"));
-                            promoInfo.setDataByteUsed(jPromoData.getDouble("base_value"));
+                            promoInfo.setDataByteUsed(dataRemaining);
                             double dataByteTotal = jPromoData.getDouble("bagInitValue");
                             promoInfo.setDataByteTotal(dataByteTotal);
                             promoInfo.setDataGByteTotal(dataByteTotal / Math.pow(1024, 3));
+                            promoInfo.setDataPercentageRemaining((int) ((dataRemaining / dataByteTotal) * 100));
 
+                            double callsRemaining = jPromoCalls.getDouble("base_value");
                             promoInfo.setCallsHuman(jPromoCalls.getDouble("value"));
                             promoInfo.setCallsUnit(jPromoCalls.getString("unit"));
-                            promoInfo.setCallsSecsUsed(jPromoCalls.getDouble("base_value"));
+                            promoInfo.setCallsSecsUsed(callsRemaining);
                             double callsSecsTotal = jPromoCalls.getDouble("bagInitValue");
                             promoInfo.setCallsSecsTotal(callsSecsTotal);
                             promoInfo.setCallsMinTotal(callsSecsTotal / 60);
+                            promoInfo.setCallsPercentageRemaining((int) ((callsRemaining / callsSecsTotal) * 100));
 
+                            double dataByteEuRemaining = jPromoDataEu.getDouble("base_value");
                             promoInfo.setDataEuHuman(jPromoDataEu.getDouble("value"));
                             promoInfo.setDataEuUnit(jPromoDataEu.getString("unit"));
-                            promoInfo.setDataEuByteUsed(jPromoDataEu.getDouble("base_value"));
+                            promoInfo.setDataEuByteUsed(dataByteEuRemaining);
                             double dataByteEuTotal = jPromoDataEu.getDouble("bagInitValue");
                             promoInfo.setDataEuByteTotal(dataByteEuTotal);
                             promoInfo.setDataEuGByteTotal(dataByteEuTotal / Math.pow(1024, 3));
+                            promoInfo.setDataEuPercentageRemaining((int) ((dataByteEuRemaining / dataByteEuTotal) * 100));
 
                             mAdapterList.add(1, promoInfo);
                             mAdapter.notifyDataSetChanged();

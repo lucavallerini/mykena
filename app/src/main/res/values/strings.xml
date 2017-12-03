@@ -14,19 +14,19 @@
     <string name="rechargeButtonText">Recharge</string>
     <string name="rechargeActivityLabel">Recharge</string>
 
-    <string name="creditLabel">Credit: </string>
+    <string name="creditLabel">Credit </string>
     <string name="credit">%1$.2f €</string>
-    <string name="simActivationDateLabel">SIM activation: </string>
-    <string name="simTerminationDateLabel">SIM termination: </string>
-    <string name="tariffPlanLabel">Tariff plan: </string>
+    <string name="simActivationDateLabel">SIM activation </string>
+    <string name="simTerminationDateLabel">SIM termination </string>
+    <string name="tariffPlanLabel">Tariff plan </string>
 
     <string name="promoDescriptionButtonContentDescription">Promo description</string>
-    <string name="promoPriceLabel">Price: </string>
-    <string name="promoActiveFromLabel">Active from: </string>
-    <string name="promoActiveUntilLabel">Active until: </string>
-    <string name="dataLabel">Data: </string>
-    <string name="dataEuLabel">Data EU: </string>
-    <string name="callsLabel">Calls: </string>
+    <string name="promoPriceLabel">Price </string>
+    <string name="promoActiveFromLabel">Active from </string>
+    <string name="promoActiveUntilLabel">Active until </string>
+    <string name="dataLabel">Data </string>
+    <string name="dataEuLabel">Data EU </string>
+    <string name="callsLabel">Calls </string>
 
     <string name="callsMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
     <string name="dataMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
@@ -59,4 +59,36 @@
 
     <string name="drawer_open">Drawer open</string>
     <string name="drawer_close">Drawer close</string>
+
+    <string name="simPin1Label">PIN 1</string>
+    <string name="simPuk1Label">PUK 1</string>
+    <string name="simPin2Label">PIN 2</string>
+    <string name="simPuk2Label">PUK 2</string>
+    <string name="showCodesButton">Show</string>
+    <string name="yourSimDetailTitle">Your SIM</string>
+    <string name="simSerialNumber">Serial number</string>
+    <string name="showSimSerialButton">Show</string>
+    <string name="hideSimSerialButton">Hide</string>
+    <string name="simCodesLabel">PIN and PUK codes</string>
+    <string name="hideCodesButton">Hide</string>
+    <string name="userDetailTitleLabel">Your contract info</string>
+    <string name="userDetailNameLabel">First name</string>
+    <string name="userDetailLastNameLabel">Last name</string>
+    <string name="userDetailSexLabel">Sex</string>
+    <string name="userDetailFiscalCodeLabel">Fiscal code</string>
+    <string name="userDetailBirthStateLabel">Birth country</string>
+    <string name="userDetailBirthDateLabel">Birth date</string>
+    <string name="userDetailBirthCityLabel">Birth city</string>
+    <string name="userDetailBirthProvinceLabel">Birth province</string>
+    <string name="userDetailAddressLabel">Address</string>
+    <string name="userDetailCityLabel">City</string>
+    <string name="userDetailProvinceLabel">Province</string>
+    <string name="userDetailContactsTitleLabel">Contacts</string>
+    <string name="userDetailContactsMobilePhoneLabel">Mobile phone number</string>
+    <string name="userDetailContactsOtherPhoneLabel">Other phone number</string>
+    <string name="userDetailContactsEmailLabel">Email</string>
+    <string name="userDetailContactsEditButtonLabel">Edit</string>
+    <string name="promoCardOtherInfoPromoButtonLabel">Other info</string>
+    <string name="creditCardRechargeButtonLabel">Credit recharge</string>
+    <string name="creditCardRechargeButtonContentDescription">Do a credit recharge</string>
 </resources>

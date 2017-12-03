@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="navigation_item_overview">Panoramica</string>
-    <string name="navigation_item_user">Dati utente</string>
-    <string name="navigation_item_sim">Dati SIM</string>
+    <string name="navigation_item_tariff_profile">Il profilo tariffario</string>
+    <string name="navigation_item_credit_left">Credito residuo</string>
+    <string name="navigation_item_promo_active">Offerte e opzioni attive</string>
+    <string name="navigation_item_user">I tuoi dati</string>
+    <string name="navigation_item_sim">La tua SIM</string>
     <string name="navigation_item_recharge">Ricarica</string>
-    <string name="navigation_item_traffic_overview">Traffico</string>
-    <string name="navigation_item_options">Opzioni tariffarie</string>
-    <string name="navigation_item_other_packages">Altri pacchetti tariffari</string>
+    <string name="navigation_item_traffic_overview">I tuoi consumi</string>
+    <string name="navigation_item_options">I tuoi servizi</string>
+    <string name="navigation_item_other_packages">Cosa puoi attivare</string>
 
     <string name="navigation_item_settings">Impostazioni</string>
     <string name="navigation_item_info">Informazioni</string>

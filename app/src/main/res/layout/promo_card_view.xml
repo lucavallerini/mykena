@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:card_view="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,65 +16,54 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp">
+            android:layout_marginTop="16dp">
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/promoNameLayout"
+            <RelativeLayout
+                android:id="@+id/promoCardTitleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
 
                 <TextView
                     android:id="@+id/promoName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="@color/primary"
-                    android:padding="8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
                     android:text="@{promoCard.promoName}"
                     android:textAlignment="center"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/promoDescriptionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/promoDescriptionButtonContentDescription"
-                    android:onClick="@{() -> promoInfo.showDialog(context, promoCard.promoName, promoCard.longDescription)}"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:scaleType="fitCenter"
-                    android:tint="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/promoName"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_info" />
-            </android.support.constraint.ConstraintLayout>
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/promoPriceLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/promoNameLayout"
-                android:layout_marginTop="8dp">
+                android:layout_height="48dp"
+                android:layout_below="@+id/promoCardTitleLayout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
 
                 <TextView
                     android:id="@+id/promoPriceLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/promoPriceLabel" />
+                    android:text="@string/promoPriceLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/promoPrice"
@@ -82,24 +71,36 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/promoPriceLabel"
                     android:text="@{promoCard.promoPrice}"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/promoPriceLayout"
+                android:background="#12000000" />
 
             <RelativeLayout
                 android:id="@+id/promoActiveFromLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_below="@+id/promoPriceLayout"
-                android:layout_marginTop="8dp">
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
 
                 <TextView
                     android:id="@+id/promoActiveFromLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/promoActiveFromLabel" />
+                    android:text="@string/promoActiveFromLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/promoActiveFrom"
@@ -107,25 +108,36 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/promoActiveFromLabel"
                     android:text="@{@string/dateHourFormat(promoCard.promoActivationDate)}"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/promoActiveFromLayout"
+                android:background="#12000000" />
 
             <RelativeLayout
                 android:id="@+id/promoActiveUntilLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_below="@+id/promoActiveFromLayout"
-                android:layout_marginTop="8dp">
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
 
                 <TextView
                     android:id="@+id/promoActiveUntilLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/promoActiveUntilLabel" />
+                    android:text="@string/promoActiveUntilLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/promoActiveUntil"
@@ -133,83 +145,208 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/promoActiveUntilLabel"
                     android:text="@{@string/dateHourFormat(promoCard.promoTerminationDate)}"
-                    android:textAlignment="viewEnd" />
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="1dp"
                 android:layout_below="@+id/promoActiveUntilLayout"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:weightSum="3">
+                android:background="#12000000" />
 
-                <LinearLayout
+            <RelativeLayout
+                android:id="@+id/callsCounterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/promoActiveUntilLayout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <RelativeLayout
+                    android:id="@+id/callsCounterTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="2">
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="8dp">
 
                     <TextView
+                        android:id="@+id/callsCounterLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/callsLabel" />
+                        android:text="@string/callsLabel"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/promoCallsMeterText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/callsCounterLabel"
                         android:text="@{@string/callsMeterText(promoCard.callsHuman, promoCard.callsUnit, promoCard.callsMinTotal, promoCard.callsUnit)}"
-                        android:textAlignment="viewEnd" />
-                </LinearLayout>
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
 
-                <LinearLayout
+                    <ProgressBar
+                        android:id="@+id/callsProgressRemaining"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_below="@+id/callsCounterLabel"
+                        android:layout_marginTop="4dp"
+                        android:elevation="2dp"
+                        android:max="100"
+                        android:progress="@{promoCard.callsPercentageRemaining}"
+                        android:progressTint="@color/accent" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/callsCounterLayout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/dataCounterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/callsCounterLayout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <RelativeLayout
+                    android:id="@+id/dataTextCounterLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="2">
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="8dp">
 
                     <TextView
+                        android:id="@+id/dataLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/dataLabel" />
+                        android:text="@string/dataLabel"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/promoDataMeterText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_alignEnd="@+id/dataLabel"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/dataLabel"
                         android:text="@{@string/dataMeterText(promoCard.dataHuman, promoCard.dataUnit, promoCard.dataGByteTotal, promoCard.dataUnit)}"
-                        android:textAlignment="viewEnd" />
-                </LinearLayout>
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
 
-                <LinearLayout
+                    <ProgressBar
+                        android:id="@+id/dataProgressRemaining"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_below="@+id/dataLabel"
+                        android:layout_marginTop="4dp"
+                        android:elevation="2dp"
+                        android:max="100"
+                        android:progress="@{promoCard.dataPercentageRemaining}"
+                        android:progressTint="@color/accent" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/dataCounterLayout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/dataEuCounteLayout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/dataCounterLayout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <RelativeLayout
+                    android:id="@+id/dataEuCounterTextLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="2">
+                    android:layout_centerVertical="true">
 
                     <TextView
+                        android:id="@+id/dataEuLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/dataEuLabel" />
+                        android:text="@string/dataEuLabel"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/promoDataEuMeterText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_alignEnd="@+id/dataEuLabel"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/dataEuLabel"
                         android:text="@{@string/dataEuMeterText(promoCard.dataEuHuman, promoCard.dataEuUnit, promoCard.dataEuGByteTotal, promoCard.dataEuUnit)}"
-                        android:textAlignment="viewEnd" />
-                </LinearLayout>
-            </LinearLayout>
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
+
+                    <ProgressBar
+                        android:id="@+id/dataEuProgressRemaining"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_below="@+id/dataEuLabel"
+                        android:layout_marginTop="4dp"
+                        android:elevation="2dp"
+                        android:max="100"
+                        android:progress="@{promoCard.dataEuPercentageRemaining}"
+                        android:progressTint="@color/accent" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/dataEuCounteLayout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/promo_other_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/dataEuCounteLayout"
+                android:paddingEnd="8dp"
+                android:paddingStart="24dp">
+
+                <Button
+                    android:id="@+id/buttonOtherInfoPromo"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:height="36dp"
+                    android:contentDescription="@string/promoDescriptionButtonContentDescription"
+                    android:onClick="@{() -> promoInfo.showDialog(context, promoCard.promoName, promoCard.longDescription)}"
+                    android:text="@string/promoCardOtherInfoPromoButtonLabel" />
+            </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </layout>

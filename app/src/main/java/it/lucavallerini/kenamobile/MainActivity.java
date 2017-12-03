@@ -64,7 +64,7 @@ class MainActivity extends AppCompatActivity
             changeFragment(new LoginFragment(), LoginFragment.LOGIN_FRAGMENT_TAG);
             loggedMenu(false);
         } else {
-            changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
+            //changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
             loggedMenu(true);
         }
     }
@@ -80,8 +80,6 @@ class MainActivity extends AppCompatActivity
         switch (mCurrentItem.getItemId()) {
             case R.id.navigation_overview:
                 changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
-                setToolbarText(getString(R.string.navigation_item_overview));
-                loggedMenu(true);
                 break;
             case R.id.navigation_recharge_logged_out:
             case R.id.navigation_recharge_logged_in:
@@ -97,7 +95,11 @@ class MainActivity extends AppCompatActivity
                 loggedMenu(mCurrentItem.getItemId() == R.id.navigation_recharge_logged_in);
                 break;
             case R.id.navigation_user:
-                setToolbarText(getString(R.string.navigation_item_user));
+                changeFragment(new UserDetailFragment(), UserDetailFragment.USER_DETAIL_FRAGMENT_TAG);
+                break;
+            case R.id.navigation_sim:
+                changeFragment(new SimDetailFragment(), SimDetailFragment.SIM_DETAIL_FRAGMENT_TAG);
+                break;
             default:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
         }
@@ -177,6 +179,18 @@ class MainActivity extends AppCompatActivity
         if (tag.equals(OverviewFragment.OVERVIEW_FRAGMENT_TAG)) {
             setToolbarText(getString(R.string.navigation_item_overview));
             mCurrentItem = mNavigationView.getMenu().findItem(R.id.navigation_overview);
+            mCurrentItem.setChecked(true);
+        }
+
+        if (tag.equals(UserDetailFragment.USER_DETAIL_FRAGMENT_TAG)) {
+            setToolbarText(getString(R.string.navigation_item_user));
+            mCurrentItem = mNavigationView.getMenu().findItem(R.id.navigation_user);
+            mCurrentItem.setChecked(true);
+        }
+
+        if (tag.equals(SimDetailFragment.SIM_DETAIL_FRAGMENT_TAG)) {
+            setToolbarText(getString(R.string.navigation_item_sim));
+            mCurrentItem = mNavigationView.getMenu().findItem(R.id.navigation_sim);
             mCurrentItem.setChecked(true);
         }
     }

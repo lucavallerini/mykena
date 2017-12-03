@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/simCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/sim_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/yourSimDetailTitle"
+                android:textAllCaps="true"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/sim_activation_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sim_detail_title"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/sim_activation_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/simActivationDateLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/sim_activation_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/sim_activation_date_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/sim_activation_date_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/sim_termination_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sim_activation_date_layout"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/sim_termination_date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/simTerminationDateLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/sim_termination_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@+id/sim_termination_date_label"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/sim_termination_date_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/sim_serial_number_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sim_termination_date_layout"
+                android:paddingEnd="8dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/sim_serial_number_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/simSerialNumber"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/sim_serial_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/sim_serial_number_label"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text=""
+                    android:textAlignment="viewEnd"
+                    android:textColor="#87000000"
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/buttonShowSerial"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:height="36dp"
+                    android:text="@string/showSimSerialButton" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sim_serial_number_show_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sim_serial_number_layout"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/buttonHideSerial"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:height="36dp"
+                    android:text="@string/hideSimSerialButton" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/sim_serial_number_show_layout"
+                android:background="#12000000" />
+
+            <RelativeLayout
+                android:id="@+id/sim_codes_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/sim_serial_number_show_layout"
+                android:paddingEnd="8dp"
+                android:paddingStart="24dp">
+
+                <TextView
+                    android:id="@+id/sim_codes_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/simCodesLabel"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/buttonShowCodes"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:height="36dp"
+                    android:text="@string/showCodesButton" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sim_codes_show_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sim_codes_layout"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:id="@+id/sim_codes_show_pin1_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingEnd="24dp"
+                    android:paddingStart="24dp">
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_pin1_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/simPin1Label"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_pin1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/sim_codes_show_pin1_label"
+                        android:text=""
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sim_codes_show_puk1_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/sim_codes_show_pin1_layout"
+                    android:paddingEnd="24dp"
+                    android:paddingStart="24dp">
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_puk1_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/simPuk1Label"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_puk1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/sim_codes_show_puk1_label"
+                        android:text=""
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sim_codes_show_pin2_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/sim_codes_show_puk1_layout"
+                    android:paddingEnd="24dp"
+                    android:paddingStart="24dp">
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_pin2_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/simPin2Label"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_pin2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/sim_codes_show_pin2_label"
+                        android:text=""
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sim_codes_show_puk2_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/sim_codes_show_pin2_layout"
+                    android:paddingEnd="24dp"
+                    android:paddingStart="24dp">
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_puk2_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/simPuk2Label"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/sim_codes_show_puk2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_toEndOf="@+id/sim_codes_show_puk2_label"
+                        android:text=""
+                        android:textAlignment="viewEnd"
+                        android:textColor="#87000000"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sim_codes_hide_button_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sim_codes_show_puk2_layout"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="24dp">
+
+                    <Button
+                        android:id="@+id/buttonHideCodes"
+                        style="?attr/buttonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:height="36dp"
+                        android:text="@string/hideCodesButton" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

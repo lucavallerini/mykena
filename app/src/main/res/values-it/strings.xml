@@ -14,19 +14,19 @@
     <string name="rechargeButtonText">Ricarica</string>
     <string name="rechargeActivityLabel">Ricarica</string>
 
-    <string name="creditLabel">Credito: </string>
+    <string name="creditLabel">Credito </string>
     <string name="credit">%1$.2f €</string>
-    <string name="simActivationDateLabel">Attivazione SIM: </string>
-    <string name="simTerminationDateLabel">Scadenza SIM: </string>
-    <string name="tariffPlanLabel">Piano tariffario: </string>
+    <string name="simActivationDateLabel">Attivazione SIM </string>
+    <string name="simTerminationDateLabel">Scadenza SIM </string>
+    <string name="tariffPlanLabel">Piano tariffario </string>
 
     <string name="promoDescriptionButtonContentDescription">Descrizione della promozione</string>
-    <string name="promoPriceLabel">Prezzo: </string>
-    <string name="promoActiveFromLabel">Data attivazione: </string>
-    <string name="promoActiveUntilLabel">Prossimo rinnovo: </string>
-    <string name="dataLabel">Dati: </string>
-    <string name="dataEuLabel">Dati UE: </string>
-    <string name="callsLabel">Chiamate: </string>
+    <string name="promoPriceLabel">Prezzo </string>
+    <string name="promoActiveFromLabel">Data attivazione </string>
+    <string name="promoActiveUntilLabel">Prossimo rinnovo </string>
+    <string name="dataLabel">Dati </string>
+    <string name="dataEuLabel">Dati UE </string>
+    <string name="callsLabel">Chiamate </string>
 
     <string name="callsMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
     <string name="dataMeterText">%1$.2f %2$s/%3$.2f %4$s</string>
@@ -42,4 +42,32 @@
     <!-- Error messages -->
     <string name="error_login_not_successfull">Errore durante il login. Controllare le proprie credenziali.</string>
     <string name="error_json_parsing_error">Errore nel recupero dei dati. Riprovare.</string>
+
+    <string name="showCodesButton">Visualizza</string>
+    <string name="yourSimDetailTitle">La tua SIM</string>
+    <string name="simSerialNumber">Seriale</string>
+    <string name="showSimSerialButton">Visualizza</string>
+    <string name="hideSimSerialButton">Nascondi</string>
+    <string name="simCodesLabel">Codici PIN e PUK</string>
+    <string name="hideCodesButton">Nascondi</string>
+    <string name="userDetailTitleLabel">Dati del tuo contratto</string>
+    <string name="userDetailNameLabel">Nome</string>
+    <string name="userDetailLastNameLabel">Cognome</string>
+    <string name="userDetailSexLabel">Sesso</string>
+    <string name="userDetailFiscalCodeLabel">Codisce fiscale</string>
+    <string name="userDetailBirthStateLabel">Stato di nascita</string>
+    <string name="userDetailBirthDateLabel">Data di nascita</string>
+    <string name="userDetailBirthCityLabel">Comune di nascita</string>
+    <string name="userDetailBirthProvinceLabel">Provincia di nascita</string>
+    <string name="userDetailAddressLabel">Indirizzo di residenza</string>
+    <string name="userDetailCityLabel">Comune</string>
+    <string name="userDetailProvinceLabel">Provincia</string>
+    <string name="userDetailContactsTitleLabel">Contatti</string>
+    <string name="userDetailContactsMobilePhoneLabel">Telefono mobile di contatto</string>
+    <string name="userDetailContactsOtherPhoneLabel">Altro numero di contatto</string>
+    <string name="userDetailContactsEmailLabel">Email</string>
+    <string name="userDetailContactsEditButtonLabel">Modifica</string>
+    <string name="promoCardOtherInfoPromoButtonLabel">Altre informazioni</string>
+    <string name="creditCardRechargeButtonLabel">Ricarica</string>
+    <string name="creditCardRechargeButtonContentDescription">Effettua una ricarica</string>
 </resources>

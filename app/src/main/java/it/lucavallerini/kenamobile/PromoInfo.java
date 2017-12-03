@@ -32,6 +32,51 @@ public class PromoInfo extends BaseObservable {
     private double callsSecsTotal;
     private double callsMinTotal;
 
+    private int callsPercentageRemaining;
+    private int smsPercentageRemaining;
+    private int dataPercentageRemaining;
+    private int dataEuPercentageRemaining;
+
+    @Bindable
+    public int getCallsPercentageRemaining() {
+        return callsPercentageRemaining;
+    }
+
+    public void setCallsPercentageRemaining(int percentageRemaining) {
+        callsPercentageRemaining = percentageRemaining;
+        notifyPropertyChanged(BR.callsPercentageRemaining);
+    }
+
+    @Bindable
+    public int getSmsPercentageRemaining() {
+        return smsPercentageRemaining;
+    }
+
+    public void setSmsPercentageRemaining(int percentageRemaining) {
+        smsPercentageRemaining = percentageRemaining;
+        notifyPropertyChanged(BR.smsPercentageRemaining);
+    }
+
+    @Bindable
+    public int getDataPercentageRemaining() {
+        return dataPercentageRemaining;
+    }
+
+    public void setDataPercentageRemaining(int percentageRemaining) {
+        dataPercentageRemaining = percentageRemaining;
+        notifyPropertyChanged(BR.dataEuPercentageRemaining);
+    }
+
+    @Bindable
+    public int getDataEuPercentageRemaining() {
+        return dataEuPercentageRemaining;
+    }
+
+    void setDataEuPercentageRemaining(int percentage) {
+        dataEuPercentageRemaining = percentage;
+        notifyPropertyChanged(BR.dataEuPercentageRemaining);
+    }
+
     @Bindable
     public String getPromoName() {
         return promoName;
