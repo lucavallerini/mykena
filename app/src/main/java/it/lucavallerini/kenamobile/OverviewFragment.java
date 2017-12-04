@@ -1,5 +1,7 @@
 package it.lucavallerini.kenamobile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -30,22 +33,6 @@ import java.util.Map;
 public class OverviewFragment extends Fragment {
 
     final static String OVERVIEW_FRAGMENT_TAG = "overviewFragment";
-    static final String MSISDN = "msisdn";
-    /**
-     * Site URIs.
-     */
-    private static final String MYKENA_URI = "https://www.kenamobile.it/wp-admin/admin-ajax.php";
-    /**
-     * Connections parameters keys.
-     */
-    private static final String ACTION = "action";
-    private static final String MAYA_ACTION = "maya_action";
-    /**
-     * Connections parameters values.
-     */
-    private static final String MAYA_INTERROGATE = "maya_interrogate";
-    private static final String MAYA_ACTION_CREDIT = "getCreditInfo";
-    private static final String MAYA_ACTION_PROMO = "getUserPromoBags";
 
     private View mOverviewFragment;
     private RecyclerView mRecyclerView;
@@ -54,6 +41,7 @@ public class OverviewFragment extends Fragment {
     private List<Object> mAdapterList;
 
     private ConnectionSingleton mConnection;
+    private SharedPreferences mPreferences;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,16 +61,22 @@ public class OverviewFragment extends Fragment {
         mConnection = ConnectionSingleton.getInstance(getContext().getApplicationContext());
         Log.i(OVERVIEW_FRAGMENT_TAG, mConnection.getCookieManager().getCookieStore().getCookies().toString());
 
+        mPreferences = getActivity().getSharedPreferences(Constants.PREF_FILE_LOGIN_NAME, Context.MODE_PRIVATE);
+
         return mOverviewFragment;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null) {
-            String msisdn = getArguments().getString(MSISDN);
+        String msisdn = mPreferences.getString(Constants.PREF_LOGIN_USER_NAME, null);
+        if (msisdn != null) {
             getCreditInfo(msisdn);
             getPromoInfo(msisdn);
+        } else {
+            mPreferences.edit().putString(Constants.PREF_LOGIN_USER_NAME, null).apply();
+            Toast.makeText(getActivity().getApplicationContext(), "User not logged in.", Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -101,7 +95,7 @@ public class OverviewFragment extends Fragment {
      */
     private void getCreditInfo(final String msisdn) {
         StringRequest requestData = new StringRequest(Request.Method.POST,
-                MYKENA_URI,
+                Constants.MYKENA_URI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -143,9 +137,9 @@ public class OverviewFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(MAYA_ACTION, MAYA_ACTION_CREDIT);
-                params.put(MSISDN, msisdn);
-                params.put(ACTION, MAYA_INTERROGATE);
+                params.put(Constants.MAYA_ACTION, Constants.MAYA_ACTION_CREDIT);
+                params.put(Constants.MSISDN, msisdn);
+                params.put(Constants.ACTION, Constants.MAYA_INTERROGATE);
 
                 return params;
             }
@@ -174,7 +168,7 @@ public class OverviewFragment extends Fragment {
      */
     private void getPromoInfo(final String msisdn) {
         StringRequest requestData = new StringRequest(Request.Method.POST,
-                MYKENA_URI,
+                Constants.MYKENA_URI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -249,9 +243,9 @@ public class OverviewFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(MAYA_ACTION, MAYA_ACTION_PROMO);
-                params.put(MSISDN, msisdn);
-                params.put(ACTION, MAYA_INTERROGATE);
+                params.put(Constants.MAYA_ACTION, Constants.MAYA_ACTION_PROMO);
+                params.put(Constants.MSISDN, msisdn);
+                params.put(Constants.ACTION, Constants.MAYA_INTERROGATE);
 
                 return params;
             }

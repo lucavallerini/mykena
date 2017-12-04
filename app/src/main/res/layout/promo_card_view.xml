@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools">
 
     <data>
@@ -11,6 +12,10 @@
         <variable
             name="promoCard"
             type="it.lucavallerini.kenamobile.PromoInfo" />
+
+        <variable
+            name="progressAnimation"
+            type="it.lucavallerini.kenamobile.OverviewAdapter" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -203,8 +208,9 @@
                         android:layout_marginTop="4dp"
                         android:elevation="2dp"
                         android:max="100"
-                        android:progress="@{promoCard.callsPercentageRemaining}"
-                        android:progressTint="@color/accent" />
+                        android:progress="0"
+                        android:progressTint="@color/accent"
+                        app:fillProgressBar="@{promoCard.callsPercentageRemaining}" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -259,8 +265,9 @@
                         android:layout_marginTop="4dp"
                         android:elevation="2dp"
                         android:max="100"
-                        android:progress="@{promoCard.dataPercentageRemaining}"
-                        android:progressTint="@color/accent" />
+                        android:progress="0"
+                        android:progressTint="@color/accent"
+                        app:fillProgressBar="@{promoCard.dataPercentageRemaining}" />
                 </RelativeLayout>
 
 
@@ -273,7 +280,7 @@
                 android:background="#12000000" />
 
             <RelativeLayout
-                android:id="@+id/dataEuCounteLayout"
+                android:id="@+id/dataEuCounterLayout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@+id/dataCounterLayout"
@@ -316,22 +323,23 @@
                         android:layout_marginTop="4dp"
                         android:elevation="2dp"
                         android:max="100"
-                        android:progress="@{promoCard.dataEuPercentageRemaining}"
-                        android:progressTint="@color/accent" />
+                        android:progress="0"
+                        android:progressTint="@color/accent"
+                        app:fillProgressBar="@{promoCard.dataEuPercentageRemaining}" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/dataEuCounteLayout"
+                android:layout_below="@+id/dataEuCounterLayout"
                 android:background="#12000000" />
 
             <RelativeLayout
                 android:id="@+id/promo_other_info_layout"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_below="@+id/dataEuCounteLayout"
+                android:layout_below="@+id/dataEuCounterLayout"
                 android:paddingEnd="8dp"
                 android:paddingStart="24dp">
 

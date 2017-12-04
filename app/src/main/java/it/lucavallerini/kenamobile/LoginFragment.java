@@ -1,6 +1,7 @@
 package it.lucavallerini.kenamobile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,25 +31,6 @@ public class LoginFragment extends Fragment {
     final static String LOGIN_FRAGMENT_TAG = "loginFragment";
 
     /**
-     * Site URIs.
-     */
-    private static final String MYKENA_URI = "https://www.kenamobile.it/wp-admin/admin-ajax.php";
-
-    /**
-     * Connections parameters keys.
-     */
-    private static final String USER = "user";
-    private static final String PASSWORD = "userPassword";
-    private static final String ACTION = "action";
-    private static final String MAYA_ACTION = "maya_action";
-
-    /**
-     * Connections parameters values.
-     */
-    private static final String MAYA_INTERROGATE = "maya_interrogate";
-    private static final String MAYA_ACTION_LOGIN = "ldapLogin";
-
-    /**
      * Listener that helps to load a new fragment from the activity
      * when it is necessary.
      */
@@ -61,6 +44,7 @@ public class LoginFragment extends Fragment {
     private CheckBox mRememberMeCheckBox;
 
     private ConnectionSingleton mConnection;
+    private SharedPreferences mPreferences;
 
     private AlertDialog mAlertDialog;
 
@@ -69,6 +53,8 @@ public class LoginFragment extends Fragment {
         // Create a new connection
         mConnection = ConnectionSingleton.getInstance(getContext().getApplicationContext());
         Log.i(LOGIN_FRAGMENT_TAG, mConnection.getCookieManager().getCookieStore().getCookies().toString());
+
+        mPreferences = getActivity().getSharedPreferences(Constants.PREF_FILE_LOGIN_NAME, Context.MODE_PRIVATE);
 
         // Inflate the layout
         return layoutInflater.inflate(R.layout.login_fragment, container, false);
@@ -105,7 +91,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAlertDialog = showDialog(getContext(), "Login", "Accesso in corso...").show();
-                login();
+                login(mUsernameTextView.getText().toString(), mPasswordTextView.getText().toString());
             }
         });
     }
@@ -141,9 +127,9 @@ public class LoginFragment extends Fragment {
     /**
      * Login into My Kena private area.
      */
-    private void login() {
+    private void login(final String username, final String password) {
         StringRequest requestLogin = new StringRequest(Request.Method.POST,
-                MYKENA_URI,
+                Constants.MYKENA_URI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -154,17 +140,14 @@ public class LoginFragment extends Fragment {
                                 // TODO Login not successfull
                                 Log.i(LOGIN_FRAGMENT_TAG, "Wrong credentials!");
                             } else {
-                                Bundle bundle = new Bundle();
-                                bundle.putString(OverviewFragment.MSISDN,
-                                        mUsernameTextView.getText().toString());
-
-                                Fragment newFragment = new OverviewFragment();
-                                newFragment.setArguments(bundle);
+                                mPreferences.edit()
+                                        .putString(Constants.PREF_LOGIN_USER_NAME, username)
+                                        .commit();
 
                                 mAlertDialog.dismiss();
 
                                 mOnLoadNewFragmentListener
-                                        .onLoadNewFragment(newFragment,
+                                        .onLoadNewFragment(new OverviewFragment(),
                                                 OverviewFragment.OVERVIEW_FRAGMENT_TAG);
                             }
                         } catch (JSONException e) {
@@ -176,16 +159,19 @@ public class LoginFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        mAlertDialog.dismiss();
+                        Toast.makeText(getActivity().getApplicationContext(), "Login error!", Toast.LENGTH_LONG)
+                                .show();
                         Log.e(LOGIN_FRAGMENT_TAG, error.toString());
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put(MAYA_ACTION, MAYA_ACTION_LOGIN);
-                params.put(USER, mUsernameTextView.getText().toString());
-                params.put(PASSWORD, mPasswordTextView.getText().toString());
-                params.put(ACTION, MAYA_INTERROGATE);
+                params.put(Constants.MAYA_ACTION, Constants.MAYA_ACTION_LOGIN);
+                params.put(Constants.USER, username);
+                params.put(Constants.PASSWORD, password);
+                params.put(Constants.ACTION, Constants.MAYA_INTERROGATE);
 
                 return params;
             }

@@ -1,5 +1,7 @@
 package it.lucavallerini.kenamobile;
 
+import android.util.Log;
+
 import java.net.CookieStore;
 import java.net.HttpCookie;
 import java.net.URI;
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 class MyCookieStore implements CookieStore {
+
+    private final static String LOG_TAG = "MyCookieStore";
 
     private ArrayList<Cookie> mCookieStore;
 
@@ -26,9 +30,12 @@ class MyCookieStore implements CookieStore {
 
         if (index != -1) {
             mCookieStore.remove(index);
+            Log.d("REMOVE WHEN ADDING", tmpCookie.toString());
         }
 
+        Log.d("ADDING", tmpCookie.toString());
         mCookieStore.add(tmpCookie);
+        Log.d("AFTER ADDED", mCookieStore.toString());
     }
 
     @Override
@@ -46,6 +53,7 @@ class MyCookieStore implements CookieStore {
             }
         }
 
+        Log.d("GET LIST FROM URI", listCookies.toString());
         return listCookies;
     }
 
@@ -63,6 +71,7 @@ class MyCookieStore implements CookieStore {
             }
         }
 
+        Log.d("GET LIST OF COOKIES", listCookies.toString());
         return listCookies;
     }
 
@@ -74,6 +83,7 @@ class MyCookieStore implements CookieStore {
             listURIs.add(mCookieStore.get(i).getUri());
         }
 
+        Log.d("GET LIST OF URI", listURIs.toString());
         return listURIs;
     }
 
@@ -148,6 +158,15 @@ class MyCookieStore implements CookieStore {
         @Override
         public int hashCode() {
             return Objects.hash(getUri(), getCookie());
+        }
+
+        @Override
+        public String toString() {
+            if (getUri() != null) {
+                return getUri().toString() + ":::" + getCookie().toString();
+            } else {
+                return getCookie().toString();
+            }
         }
     }
 }

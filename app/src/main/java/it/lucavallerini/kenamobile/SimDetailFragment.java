@@ -1,8 +1,11 @@
 package it.lucavallerini.kenamobile;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,18 @@ import android.view.animation.Transformation;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class SimDetailFragment extends Fragment {
 
     static final String SIM_DETAIL_FRAGMENT_TAG = "SIM_DETAIL_FRAGMENT";
-
     View mCodesLayout;
     View mSerialLayout;
     Button mShowCodesButton;
@@ -22,7 +33,6 @@ public class SimDetailFragment extends Fragment {
     Button mShowSerialButton;
     Button mHideSerialButton;
     TextView mSerialText;
-
     View.OnClickListener mShowSerialListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -31,7 +41,6 @@ public class SimDetailFragment extends Fragment {
             mSerialText.setVisibility(View.VISIBLE);
         }
     };
-
     View.OnClickListener mHideSerialListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -40,7 +49,6 @@ public class SimDetailFragment extends Fragment {
             mShowSerialButton.setVisibility(View.VISIBLE);
         }
     };
-
     View.OnClickListener mShowCodesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -48,7 +56,6 @@ public class SimDetailFragment extends Fragment {
             expand(mCodesLayout);
         }
     };
-
     View.OnClickListener mHideCodesListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -56,6 +63,8 @@ public class SimDetailFragment extends Fragment {
             mShowCodesButton.setVisibility(View.VISIBLE);
         }
     };
+    private ConnectionSingleton mConnection;
+    private SharedPreferences mPreferences;
 
     public static void expand(final View view) {
         view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -129,5 +138,46 @@ public class SimDetailFragment extends Fragment {
         mHideCodesButton.setOnClickListener(mHideCodesListener);
         mShowSerialButton.setOnClickListener(mShowSerialListener);
         mHideSerialButton.setOnClickListener(mHideSerialListener);
+
+        mConnection = ConnectionSingleton.getInstance(getContext().getApplicationContext());
+        mPreferences = getActivity().getSharedPreferences(Constants.PREF_FILE_LOGIN_NAME, Context.MODE_PRIVATE);
+
+        String msisdn = mPreferences.getString(Constants.PREF_LOGIN_USER_NAME, null);
+        if (msisdn != null) {
+            getSimDetail(msisdn);
+        }
+    }
+
+    /**
+     * Obtain SIM info by its msisdn.
+     *
+     * @param msisdn Customer's phone number
+     */
+    private void getSimDetail(final String msisdn) {
+        StringRequest request = new StringRequest(Request.Method.POST,
+                Constants.MYKENA_URI,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i(SIM_DETAIL_FRAGMENT_TAG, response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(SIM_DETAIL_FRAGMENT_TAG, error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put(Constants.MAYA_ACTION, Constants.MAYA_ACTION_INFO_SIM);
+                params.put(Constants.MSISDN, msisdn);
+                params.put(Constants.ACTION, Constants.MAYA_INTERROGATE);
+                return params;
+            }
+        };
+
+        mConnection.addToRequestQueue(request.setTag("GET_SIM_DETAIL_REQUEST"));
     }
 }

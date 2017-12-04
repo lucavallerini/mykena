@@ -12,14 +12,28 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
 class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         OnLoadNewFragmentListener {
+
+    /**
+     * Reference for all outgoing connections
+     */
+    ConnectionSingleton mConnectionSingleton;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -67,6 +81,8 @@ class MainActivity extends AppCompatActivity
             //changeFragment(new OverviewFragment(), OverviewFragment.OVERVIEW_FRAGMENT_TAG);
             loggedMenu(true);
         }
+
+        mConnectionSingleton = ConnectionSingleton.getInstance(getApplicationContext());
     }
 
     @Override
@@ -84,7 +100,7 @@ class MainActivity extends AppCompatActivity
             case R.id.navigation_recharge_logged_out:
             case R.id.navigation_recharge_logged_in:
                 Bundle bundle = new Bundle();
-                bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, WebViewFragment.RECHARGE_URI);
+                bundle.putString(WebViewFragment.URI_TO_LOAD_KEY, Constants.RECHARGE_URI);
 
                 Fragment newFragment = new WebViewFragment();
                 newFragment.setArguments(bundle);
@@ -99,6 +115,23 @@ class MainActivity extends AppCompatActivity
                 break;
             case R.id.navigation_sim:
                 changeFragment(new SimDetailFragment(), SimDetailFragment.SIM_DETAIL_FRAGMENT_TAG);
+                break;
+            case R.id.navigation_logout:
+                String username = getSharedPreferences(Constants.PREF_FILE_LOGIN_NAME, MODE_PRIVATE)
+                        .getString(Constants.PREF_LOGIN_USER_NAME, null);
+                if (username != null) {
+                    logout(username);
+                    changeFragment(new LoginFragment(), LoginFragment.LOGIN_FRAGMENT_TAG);
+                    loggedMenu(false);
+                    getSharedPreferences(Constants.PREF_FILE_LOGIN_NAME, MODE_PRIVATE).edit()
+                            .putString(Constants.PREF_LOGIN_USER_NAME, null)
+                            .apply();
+                } else {
+                    loggedMenu(false);
+                }
+                break;
+            case R.id.navigation_login:
+                changeFragment(new LoginFragment(), LoginFragment.LOGIN_FRAGMENT_TAG);
                 break;
             default:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -223,5 +256,40 @@ class MainActivity extends AppCompatActivity
 
         // Otherwise defer to system default behavior.
         super.onBackPressed();
+    }
+
+    /**
+     * Logout from My Kena for the provided phone number.
+     *
+     * @param msisdn The phone number.
+     */
+    private void logout(final String msisdn) {
+        StringRequest requestLogout = new StringRequest(Request.Method.POST,
+                Constants.MYKENA_URI,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("logout()", response);
+                        mConnectionSingleton.removeCookies();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("logout()", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put(Constants.MAYA_ACTION, Constants.MAYA_ACTION_LOGOUT);
+                params.put(Constants.MSISDN, msisdn);
+                params.put(Constants.ACTION, Constants.MAYA_INTERROGATE);
+
+                return params;
+            }
+        };
+
+        mConnectionSingleton.addToRequestQueue(requestLogout.setTag("REQUEST"));
     }
 }

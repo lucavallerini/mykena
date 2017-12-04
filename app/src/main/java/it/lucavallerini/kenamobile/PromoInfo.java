@@ -42,7 +42,7 @@ public class PromoInfo extends BaseObservable {
         return callsPercentageRemaining;
     }
 
-    public void setCallsPercentageRemaining(int percentageRemaining) {
+    void setCallsPercentageRemaining(int percentageRemaining) {
         callsPercentageRemaining = percentageRemaining;
         notifyPropertyChanged(BR.callsPercentageRemaining);
     }
@@ -62,7 +62,7 @@ public class PromoInfo extends BaseObservable {
         return dataPercentageRemaining;
     }
 
-    public void setDataPercentageRemaining(int percentageRemaining) {
+    void setDataPercentageRemaining(int percentageRemaining) {
         dataPercentageRemaining = percentageRemaining;
         notifyPropertyChanged(BR.dataEuPercentageRemaining);
     }

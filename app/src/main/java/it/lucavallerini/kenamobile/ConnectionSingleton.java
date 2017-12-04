@@ -80,6 +80,11 @@ class ConnectionSingleton {
         }
     }
 
+    void removeCookies() {
+        mCookieManger.getCookieStore()
+                .removeAll();
+    }
+
     MyCookieManager getCookieManager() {
         return mCookieManger;
     }
