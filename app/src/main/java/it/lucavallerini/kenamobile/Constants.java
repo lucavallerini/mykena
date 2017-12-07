@@ -3,6 +3,15 @@ package it.lucavallerini.kenamobile;
 final class Constants {
 
     /**
+     * Account type string.
+     */
+    static final String ACCOUNT_TYPE = "it.lucavallerini.kenamobile";
+    /**
+     * Authtoken type string.
+     */
+    static final String AUTHTOKEN_TYPE = "it.lucavallerini.kenamobile";
+
+    /**
      * Site URIs.
      */
     static final String COOKIE_URI = "https://www.kenamobile.it";
